@@ -1,0 +1,32 @@
+/* Anmeldeseite der Gebos FAQ – 341-Farben, eckige Kanten, nur helles Design. */
+:root {
+  color-scheme: light;
+  --red: #cc1a1e;
+  --red-ink: #b3161a;
+  --ink: #000714;
+  --bg: #f5f5f6;
+  --surface: #ffffff;
+  --line: #dcdde0;
+  --muted: #5c5f66;
+  --faint: #7a7d84;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; border-radius: 0; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.55 var(--body); }
+
+.loginwrap { min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 64px 16px; }
+.loginbox { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--ink); padding: 28px 26px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 15px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+.brand .mark { background: var(--red); color: #fff; font: 800 24px/1 var(--display); letter-spacing: .02em; padding: 5px 9px 3px; }
+.brand .sep { color: var(--line); }
+.loginbox h1 { font: 800 44px/.95 var(--display); text-transform: uppercase; margin: 0 0 18px; }
+.loginerr { background: #fbe3e3; border: 1px solid #efb9b9; border-left: 4px solid var(--red); padding: 10px 14px; margin: 0 0 18px; font-size: 15px; }
+.fld { margin-bottom: 16px; }
+.fld label { display: block; font: 700 14px var(--display); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+.fld input { width: 100%; font: 17px var(--body); padding: 12px 14px; border: 2px solid var(--ink); background: #fff; color: var(--ink); }
+.fld input:focus { outline: 3px solid var(--red); outline-offset: 2px; }
+.btn { border: 0; background: var(--red); color: #fff; font: 700 18px var(--display); letter-spacing: .12em; text-transform: uppercase; padding: 13px; cursor: pointer; }
+.btn:disabled { opacity: .7; cursor: wait; }
+.btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }

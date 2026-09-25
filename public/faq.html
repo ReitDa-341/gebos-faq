@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Gebos FAQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  /* Grundeinstellungen */
+  html, body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+  /* Nur helles Design – kein Darkmode */
+  :root {
+    color-scheme: light;
+    --red: #cc1a1e;
+    --red-ink: #b3161a;
+    --ink: #000714;
+    --grey: #666666;
+    --bg: #f5f5f6;
+    --surface: #ffffff;
+    --line: #dcdde0;
+    --text: #000714;
+    --muted: #5c5f66;
+    --mark: #ffe1e2;
+    --open-bg: #fff4d6;
+    --open-ink: #7a5600;
+    --done-bg: #e3f3e6;
+    --done-ink: #1d6b2c;
+    --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+    --body: "Source Sans 3", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; border-radius: 0; }
+  body { background: var(--bg); color: var(--text); font: 17px/1.55 var(--body); padding-inline: 16px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+
+  /* Kopfzeile */
+  .top { background: var(--ink); color: #fff; margin-inline: -16px; padding: 14px 16px; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+  .logo { background: var(--red); color: #fff; font: 800 26px/1 var(--display); padding: 6px 10px 4px; letter-spacing: .02em; }
+  .brand span { font: 600 15px/1.2 var(--display); letter-spacing: .12em; text-transform: uppercase; color: #c9ccd2; }
+  .toplinks { display: flex; gap: 14px; align-items: center; }
+  .logout { color: #c9ccd2; font: 700 13px var(--display); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+  .logout:hover, .logout:focus-visible { color: #fff; }
+  .tag { font: 700 13px var(--display); letter-spacing: .14em; text-transform: uppercase; color: #fff; border: 1.5px solid #c9ccd2; padding: 4px 8px 3px; }
+
+  /* Kopfbereich */
+  .hero { padding-block: 40px 26px; border-bottom: 3px solid var(--ink); }
+  .eyebrow { font: 700 14px var(--display); letter-spacing: .16em; text-transform: uppercase; color: var(--red-ink); margin: 0 0 6px; }
+  h1 { font: 800 clamp(44px, 8vw, 84px)/.92 var(--display); text-transform: uppercase; margin: 0 0 14px; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 60ch; margin: 0 0 22px; }
+  .search { display: flex; border: 2px solid var(--ink); background: var(--surface); max-width: 680px; }
+  .search label { position: absolute; left: -9999px; }
+  .search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--text); font: 18px var(--body); padding: 14px 16px; }
+  .search input:focus { outline: none; }
+  .search:focus-within { outline: 3px solid var(--red); outline-offset: 2px; }
+  .search button { border: 0; background: var(--red); color: #fff; font: 700 16px var(--display); letter-spacing: .1em; text-transform: uppercase; padding: 0 18px; cursor: pointer; }
+
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .chip { border: 1.5px solid var(--ink); background: transparent; color: var(--text); font: 700 15px var(--display); letter-spacing: .08em; text-transform: uppercase; padding: 7px 12px 6px; cursor: pointer; display: inline-flex; gap: 8px; align-items: baseline; }
+  .chip small { font: 600 13px var(--body); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .chip[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .chip[aria-pressed="true"] small { color: #c9ccd2; }
+  .chip:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+
+  /* Hauptbereich */
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 40px; padding-block: 32px 64px; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } aside { order: -1; } }
+
+  .status { color: var(--muted); font-size: 15px; margin: 0 0 8px; min-height: 1.5em; }
+  .group { margin-bottom: 36px; scroll-margin-top: 16px; }
+  .group h2 { font: 800 30px/1 var(--display); text-transform: uppercase; margin: 0 0 4px; display: flex; align-items: baseline; gap: 12px; }
+  .group h2 .n { font: 700 15px var(--display); color: var(--red-ink); letter-spacing: .1em; }
+  .group > p { color: var(--muted); margin: 0 0 12px; font-size: 15px; max-width: 64ch; }
+
+  details { background: var(--surface); border: 1px solid var(--line); border-top-width: 0; }
+  details:first-of-type { border-top-width: 1px; }
+  details[open] { border-left: 4px solid var(--red); }
+  details.todo { background: #fdeaea; }
+  summary { list-style: none; cursor: pointer; padding: 16px 18px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; font-weight: 700; font-size: 18px; line-height: 1.35; }
+  summary::-webkit-details-marker { display: none; }
+  summary .q { flex: 1; }
+  summary .for { display: inline-block; margin-left: 8px; font: 700 12px var(--display); letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--red); border: 1px solid var(--red); padding: 2px 6px 1px; vertical-align: 2px; }
+  summary::after { content: "+"; font: 700 26px/1 var(--display); color: var(--red-ink); flex: none; transition: transform .15s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  .answer { padding: 0 18px 18px; max-width: 68ch; }
+  .answer p { margin: 0 0 10px; }
+  .answer ol, .answer ul { margin: 0 0 10px; padding-left: 22px; }
+  .answer .pending { color: var(--muted); font-style: italic; }
+  .meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 14px; color: var(--muted); }
+  .badge { font: 700 12px var(--display); letter-spacing: .12em; text-transform: uppercase; padding: 3px 7px 2px; }
+  .badge.open { background: var(--open-bg); color: var(--open-ink); }
+  .badge.done { background: var(--done-bg); color: var(--done-ink); }
+  .badge.wip { background: var(--ink); color: #fff; }
+  .linkbtn { border: 0; background: none; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
+  .linkbtn:hover { color: var(--text); }
+  mark { background: var(--mark); color: inherit; padding: 0 1px; }
+
+  .group h2 .no { color: var(--red); }
+  summary .code { display: inline-block; min-width: 2.2em; font: 800 17px/1.35 var(--display); color: var(--red-ink); letter-spacing: .04em; }
+
+  /* Screenshots mit Nummern-Markierungen */
+  .shot { margin: 4px 0 14px; max-width: 520px; }
+  .shot .frame { position: relative; border: 1px solid var(--line); background: #e8edf5; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .pin { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--red); color: #fff; font: 800 15px/26px var(--display); text-align: center; box-shadow: 0 0 0 2px #fff; }
+  .shot figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  .steps { counter-reset: s; list-style: none; padding-left: 0 !important; display: flex; flex-direction: column; gap: 8px; }
+  .steps > li { display: flex; gap: 10px; align-items: flex-start; }
+  .steps > li > span { flex: 1; min-width: 0; }
+  .steps .shot { margin-top: 10px; }
+  .shot.wide { max-width: 640px; }
+  .steps > li::before { counter-increment: s; content: counter(s); flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--red); color: #fff; font: 800 14px/24px var(--display); text-align: center; margin-top: 1px; }
+  ol.sub { counter-reset: sb; list-style: none; padding: 0; margin: 12px 0 4px; display: flex; flex-direction: column; gap: 12px; }
+  ol.sub > li { display: flex; gap: 10px; align-items: flex-start; }
+  ol.sub > li > span { flex: 1; min-width: 0; }
+  ol.sub > li::before { counter-increment: sb; content: counter(sb, lower-alpha); flex: none; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--red); color: var(--red-ink); background: var(--surface); font: 800 13px/18px var(--display); text-align: center; margin-top: 1px; box-sizing: border-box; }
+
+  .intro { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--ink); padding: 14px 18px; margin: 0 0 14px; max-width: 68ch; }
+  .intro .label { display: block; font: 700 13px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--red-ink); margin-bottom: 4px; }
+  .intro p { margin: 0; }
+  .answer .tip { font-size: 15px; background: var(--bg); padding: 8px 12px; margin: 0 0 8px; }
+  .answer code { font: 600 15px ui-monospace, Consolas, monospace; background: var(--surface); border: 1px solid var(--line); padding: 0 4px; }
+  .answer a { color: var(--red-ink); font-weight: 700; }
+
+  .legend { display: grid; grid-template-columns: 275px 1fr; gap: 12px 16px; align-items: center; margin: 4px 0 10px; }
+  .legend img { border: 1px solid var(--line); display: block; }
+  .legend p { margin: 0; }
+  @media (max-width: 560px) { .legend { grid-template-columns: 1fr; } .legend p { margin-bottom: 8px; } }
+
+  .codes { display: grid; grid-template-columns: 46px 1fr; gap: 8px 14px; align-items: center; margin: 4px 0 10px; }
+  .kz { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 32px; border: 1px solid #000; outline: 1px solid #fff; outline-offset: -3px; font: 600 15px/1 Arial, Helvetica, sans-serif; }
+  .codes p { margin: 0; }
+
+  .answer .note { border: 1px solid var(--line); border-top: 3px solid var(--ink); background: var(--bg); padding: 10px 14px; margin: 0 0 14px; }
+  .answer .note p { margin: 0 0 6px; }
+  .answer .note p:last-child { margin: 0; }
+  .modes-intro { display: block; margin: 10px 0 6px; }
+  .mode { display: flex; gap: 12px; align-items: center; background: var(--bg); border-left: 3px solid var(--red); padding: 8px 12px; margin-bottom: 6px; }
+  .mode svg { width: 28px; height: 28px; color: var(--red); flex: none; }
+  .answer h4 { font: 800 19px/1.2 var(--display); text-transform: uppercase; letter-spacing: .04em; margin: 18px 0 8px; }
+  .answer h4:first-child { margin-top: 0; }
+  dl.cols { display: grid; grid-template-columns: minmax(110px, max-content) 1fr; gap: 6px 16px; margin: 0 0 12px; font-size: 16px; }
+  dl.cols dt { font: 700 15px/1.5 var(--display); letter-spacing: .06em; }
+  dl.cols dd { margin: 0; }
+  @media (max-width: 560px) { dl.cols { grid-template-columns: 1fr; gap: 2px; } dl.cols dd { margin-bottom: 8px; } }
+
+  .infobody { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--ink); padding: 18px 20px; max-width: 72ch; }
+  .infobody h3 { font: 800 20px/1.2 var(--display); text-transform: uppercase; letter-spacing: .04em; margin: 20px 0 6px; }
+  .infobody p { margin: 0 0 10px; }
+  .infobody .points { margin: 0 0 10px; padding-left: 20px; }
+  .infobody .points li { margin-bottom: 4px; }
+  .phase { display: grid; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .phase .label, .must .label { font: 700 13px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--red-ink); }
+  .phase .dates { font: 800 clamp(28px, 5vw, 40px)/1 var(--display); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+  .phase p { margin: 8px 0 0; }
+  .must { background: #fbe3e3; color: var(--text); border: 1px solid #efb9b9; border-left: 4px solid var(--red); padding: 12px 16px; margin-top: 16px; }
+  .must .label { color: var(--red-ink); display: block; margin-bottom: 2px; }
+  .must p { margin: 0; }
+  .must.inline { display: block; margin: 10px 0 4px; font-size: 16px; }
+  .must.midnight { background: #fbe3e3; color: var(--text); border: 1px solid #efb9b9; border-left: 4px solid var(--red); font-size: 17px; padding: 14px 18px; margin: 14px 0; }
+  .must.midnight .label { color: var(--red-ink); opacity: 1; }
+  .must.midnight strong { color: var(--red-ink); }
+  .must.midnight .nx { display: block; margin-top: 8px; font: 700 18px var(--display); letter-spacing: .02em; }
+  .must.midnight code { background: #fff; color: var(--red-ink); border: 1px solid #efb9b9; font-size: 18px; padding: 2px 8px; margin-right: 6px; }
+  .must strong { color: var(--red-ink); }
+
+  .empty { border: 2px dashed var(--line); padding: 28px; }
+  .empty h3 { font: 800 26px var(--display); text-transform: uppercase; margin: 0 0 6px; }
+
+  /* Seitenleiste */
+  aside { display: flex; flex-direction: column; gap: 20px; align-self: start; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+  @media (max-width: 860px) { aside { position: static; } }
+  .box { background: var(--surface); border: 1px solid var(--line); padding: 18px 20px; }
+  .box h3 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 12px; }
+  .toc { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .toc a { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none; font-weight: 600; }
+  .toc li:last-child a { border-bottom: 0; }
+  .toc a:hover { color: var(--red-ink); }
+  .toc small { color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 400; }
+  .progress { font-size: 15px; color: var(--muted); margin: 0 0 8px; font-variant-numeric: tabular-nums; }
+  .bar { height: 8px; background: var(--line); }
+  .bar i { display: block; height: 100%; background: var(--red); }
+
+  footer { border-top: 3px solid var(--ink); padding-block: 18px 32px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 10px 16px; font-weight: 600; font-size: 15px; border-left: 4px solid var(--red); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="341 Three for One Trading">
+      <span class="logo">341</span>
+      <span>Three for One Trading</span>
+    </a>
+    <span class="toplinks"><span class="tag">Nur intern</span><a class="logout" href="/logout">Abmelden</a></span>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <section class="hero">
+    <p class="eyebrow">Gebos TimeManagement</p>
+    <h1>Gebos FAQ</h1>
+    <p class="lede">Antworten zur Zeiterfassung mit Gebos: Kalender, Abrechnungsliste, Fehlerprotokoll, Anwesenheit, Terminal, Anträge und Technik. Einfach suchen oder einen Bereich wählen.</p>
+    <form class="search" role="search" id="searchForm">
+      <label for="q">FAQ durchsuchen</label>
+      <input id="q" type="search" autocomplete="off" placeholder="z. B. Urlaub beantragen, Buchung vergessen …">
+      <button type="button" id="clear" hidden>Leeren</button>
+    </form>
+    <div class="chips" id="chips" aria-label="Bereiche"></div>
+  </section>
+
+  <main>
+    <div>
+      <p class="status" id="status" aria-live="polite"></p>
+      <div id="list"></div>
+    </div>
+
+    <aside>
+      <div class="box">
+        <h3>Bereiche</h3>
+        <ul class="toc" id="toc"></ul>
+      </div>
+      <div class="box">
+        <h3>Fortschritt</h3>
+        <p class="progress" id="progress"></p>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <span>341 Three for One Trading · interne Hilfe zu Gebos TimeManagement</span>
+    <span id="stand"></span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/*
+  FAQ-Daten. Später kommen diese Einträge aus Supabase (Tabelle "faq").
+  a: null        = Antwort noch offen
+  for: "Vorgesetzte" = Frage richtet sich nur an eine bestimmte Gruppe
+  Reihenfolge der Bereiche wie auf der Gebos-Startseite.
+*/
+const CATEGORIES = [
+  { id: "uebergang", name: "Projektablauf & Übergangsphase", text: "Wie wir im Oktober 2026 von Excel auf Gebos umstellen.",
+    info: `<div class="phase">
+        <span class="label">Übergangsphase</span>
+        <strong class="dates">1.10.2026 – 31.10.2026</strong>
+        <p>Im Oktober arbeiten wir <strong>parallel</strong>: Das bisherige Excel-Zeiterfassungstool wird weiterverwendet, und gleichzeitig wird schon im neuen Gebos-Tool gebucht.</p>
+      </div>
+      <h3>Was im Oktober gebucht wird</h3>
+      <ul class="points">
+        <li><strong>Wie im September:</strong> Kommt-Buchungen und Geht-Buchungen.</li>
+        <li><strong>Neu im Oktober:</strong> Dienstreisen, Arztbesuche und sonstige Sonderfälle, die in der Dokumentation und in der Schulung gezeigt werden.</li>
+      </ul>
+      <h3>Einstellungen noch nicht final</h3>
+      <p>Aktuell sind noch nicht alle Einstellungen im System korrekt. Mit Fragen zur <strong>Abrechnungsliste</strong> bitte bis <strong>Mitte Oktober</strong> warten, bis alles fein justiert und eingestellt ist. Danach gibt es genaue Erläuterungen zu allen Punkten der Abrechnungsliste, die Fragen aufwerfen.</p>
+      <h3>Übertrag ins neue System</h3>
+      <p>Mit dem Stand von <strong>Ende Oktober</strong> werden alle <strong>ZA+/−-Stunden</strong> sowie alle <strong>Urlaube</strong> ins neue System übertragen. Der Übertrag von den Excel-Listen auf das System wird 1–2 Wochen dauern. Spätestens mit <strong>15.11.2026</strong> sollten wir vollständig auf dem neuen System sein.</p>
+      <div class="must">
+        <span class="label">Pflicht ab 1. Oktober</span>
+        <p>Kommt und Geht zu buchen ist ab 1. Oktober <strong>zwingend notwendig</strong>. Das wird vom jeweiligen Vorgesetzten sowie von Alex und David mehrmals pro Woche gecheckt.</p>
+      </div>` },
+  { id: "terminal",    name: "Terminal",               text: "Kommen und Gehen buchen – mit Schnellbuchung oder nach der Anmeldung." },
+  { id: "abwesenheiten", name: "Abwesenheiten",        text: "Urlaub, Zeitausgleich, Dienstreise, Schulung und Messe beantragen und stornieren.",
+    intro: "Geplante Abwesenheiten werden im <strong>Workflow</strong> <strong>beantragt</strong> und von deinem <strong>direkten Vorgesetzten genehmigt</strong>. Der Workflow ist ein Genehmigungsverfahren, mit dem wir in Zukunft arbeiten." },
+  { id: "anwesenheit", name: "Anwesenheitsübersicht",  text: "Wer in welcher Abteilung gerade eingestempelt ist, wer nicht eingestempelt ist und wer ganztägig abwesend ist." },
+  { id: "kalender",   name: "Kalender",               text: "Alle Mitarbeiter und ihre geplanten Abwesenheiten im gewählten Zeitraum." },
+  { id: "abrechnung",  name: "Abrechnungsliste",       text: "Soll- und Ist-Zeiten, Salden und Überstunden für einen Zeitraum.",
+    intro: "Die <strong>Abrechnungsliste</strong> ist die zentrale Stelle für deine Zeiten. Hier <strong>behebst du Fehler</strong> und <strong>erstellst sonstige Einträge</strong>, zum Beispiel für einen Arztbesuch oder eine längere Pause." },
+  { id: "fehler",      name: "Fehlerprotokoll",        text: "Alle Probleme beim Buchen, zum Beispiel vergessene Buchungen.",
+    intro: "Das <strong>Fehlerprotokoll</strong> ist eine Gesamtübersicht aller <strong>offenen Fehler</strong>. Nutze es als <strong>Check</strong>, wenn du mit der Abrechnungsliste fertig bist." },
+  { id: "hardware",    name: "Hardware / Webserver",   text: "Chip, Erfassungsterminal und Zugang zur Gebos-Webseite." }
+];
+
+/* Screenshot mit Nummern-Markierungen: pins = [[links %, oben %, Nummer], …] */
+function fig(src, w, h, alt, pins, cls) {
+  return `<figure class="shot${cls ? " " + cls : ""}" style="max-width:${cls ? 640 : Math.round(w * 1.25)}px">
+    <div class="frame"><img src="img/${src}" alt="${alt}" width="${w}" height="${h}">
+      ${pins.map(p => `<span class="pin" style="left:${p[0]}%;top:${p[1]}%">${p[2]}</span>`).join("")}
+    </div></figure>`;
+}
+
+const FAQ = [
+  { id: "terminal-schnellbuchung", cat: "terminal", q: "Schnellbuchung: Wie buche ich Kommen oder Gehen direkt auf der Anmeldeseite?",
+    a: `<figure class="shot">
+          <div class="frame">
+            <img src="img/terminal-schnellbuchung.png" alt="Gebos Benutzeranmeldung mit Feldern für Benutzername und Passwort und der Schnellbuchung mit den Knöpfen Kommt und Geht" width="503" height="377">
+            <span class="pin" style="left:5.6%;top:27.6%">1</span>
+            <span class="pin" style="left:5.6%;top:46.7%">2</span>
+            <span class="pin" style="left:24.5%;top:63%">3</span>
+            <span class="pin" style="left:63.5%;top:63%">3</span>
+          </div>
+          <figcaption>Anmeldeseite von Gebos mit der Schnellbuchung</figcaption>
+        </figure>
+        <ol class="steps">
+          <li><span><strong>Benutzername</strong> eingeben (3 Zeichen).</span></li>
+          <li><span><strong>Passwort</strong> eingeben.</span></li>
+          <li><span>Auf <strong>Kommt</strong> oder <strong>Geht</strong> klicken.</span></li>
+        </ol>
+        <p>Damit ist deine Buchung erledigt.</p>` },
+  { id: "terminal-angemeldet", cat: "terminal", q: "Buchung nach der Anmeldung: Wie buche ich Kommen oder Gehen?",
+    a: `<ol class="steps">
+          <li><span>Benutzername (3 Zeichen) und Passwort eingeben, wie bei 1a, und auf <strong>LOGIN</strong> klicken.
+            <figure class="shot">
+              <div class="frame">
+                <img src="img/terminal-schnellbuchung.png" alt="Gebos Benutzeranmeldung mit markiertem LOGIN-Knopf" width="503" height="377">
+                <span class="pin" style="left:81%;top:45.9%">1</span>
+              </div>
+            </figure></span></li>
+          <li><span>Es öffnet sich die Übersicht. Dort auf <strong>Terminal</strong> klicken.
+            <figure class="shot wide">
+              <div class="frame">
+                <img src="img/startseite-anonym.png" alt="Gebos Übersicht mit den Kacheln Kalender, Abrechnungsliste, Fehlerprotokoll, Anwesenheitsübersicht, Terminal und Workflow; Terminal ist markiert" width="1048" height="532">
+                <span class="pin" style="left:28.6%;top:65.4%">2</span>
+              </div>
+            </figure></span></li>
+          <li><span>Auf <strong>Kommt</strong> oder <strong>Geht</strong> klicken.
+            <figure class="shot">
+              <div class="frame">
+                <img src="img/terminal-anonym.png" alt="Gebos Terminal-Seite mit den Knöpfen Kommt und Geht" width="587" height="566">
+                <span class="pin" style="left:39.5%;top:33.2%">3</span>
+                <span class="pin" style="left:76.5%;top:33.2%">3</span>
+              </div>
+            </figure></span></li>
+        </ol>` },
+
+  { id: "abw-urlaub", cat: "abwesenheiten", q: "Wie beantrage ich Urlaub?",
+    a: `<ol class="steps">
+          <li><span>Nach der Anmeldung in der Übersicht auf <strong>Workflow</strong> klicken.
+            ${fig("startseite-anonym.png", 1048, 532, "Gebos Übersicht, die Kachel Workflow ist markiert", [[48.9, 65.4, 1]], "wide")}</span></li>
+          <li><span>Unten auf <strong>+ Abwesenheitsantrag</strong> klicken.
+            ${fig("workflow-start-neu.png", 740, 732, "Workflow mit Filter, Nachrichtenliste und den Knöpfen Abwesenheitsantrag, Tagesoptionen und Dienstreisenacherfassung", [[27.8, 93.4, 2]], "wide")}</span></li>
+          <li><span>Bei <strong>Abwesenheit</strong> „Urlaub“ auswählen.
+            ${fig("workflow-auswahl-v2.png", 370, 504, "Abwesenheitsantrag mit geöffneter Auswahl, Urlaub ist markiert", [[59.2, 66.3, 3]])}</span></li>
+          <li><span><strong>Von</strong> und <strong>Bis</strong> eingeben.
+            ${fig("workflow-urlaub.png", 370, 504, "Ausgefüllter Abwesenheitsantrag für Urlaub mit Von, Bis, Kommentar und Abschicken", [[85.7, 67.7, 4], [87, 81.5, 5], [33.8, 96.2, 6]])}</span></li>
+          <li><span>Wenn du willst, einen <strong>Kommentar</strong> schreiben.</span></li>
+          <li><span>Auf <strong>Abschicken</strong> klicken. Das Fenster schließt sich und dein Antrag geht an deinen direkten Vorgesetzten zur Genehmigung.</span></li>
+        </ol>
+        <p class="tip"><strong>Tipp Datum:</strong> Du musst keine Punkte tippen. Aus <code>2509</code> wird beim Verlassen des Feldes automatisch 25.09.2026.</p>
+        <p class="tip"><strong>Urlaubsstand:</strong> Oben im Antrag siehst du Anspruch, Verbraucht, Rest und Verplant.</p>
+        <p class="tip"><strong>Abbrechen</strong> schließt das Fenster, ohne etwas abzuschicken.</p>` },
+
+  { id: "abw-zeitausgleich", cat: "abwesenheiten", q: "Wie beantrage ich Zeitausgleich?",
+    a: `<ol class="steps">
+          <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
+          <li><span>Bei <strong>Abwesenheit</strong> „Zeitausgleich“ auswählen.</span></li>
+          <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.
+            ${fig("workflow-zeitausgleich.png", 370, 504, "Ausgefüllter Abwesenheitsantrag für Zeitausgleich", [[59.2, 61.7, 2], [33.8, 96.2, 3]])}</span></li>
+        </ol>` },
+
+  { id: "abw-dienstreise", cat: "abwesenheiten", q: "Wie beantrage ich eine Dienstreise?",
+    a: `<ol class="steps">
+          <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
+          <li><span>Bei <strong>Abwesenheit</strong> „Dienstreise“ auswählen.</span></li>
+          <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.
+            ${fig("workflow-dienstreise.png", 370, 504, "Ausgefüllter Abwesenheitsantrag für eine Dienstreise mit Kommentar", [[59.2, 61.7, 2], [33.8, 96.2, 3]])}</span></li>
+        </ol>` },
+
+  { id: "abw-schulung", cat: "abwesenheiten", q: "Wie beantrage ich eine Schulung?",
+    a: `<ol class="steps">
+          <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
+          <li><span>Bei <strong>Abwesenheit</strong> „Schulung“ auswählen.
+            ${fig("workflow-schulung-v2.png", 370, 504, "Abwesenheitsantrag mit geöffneter Auswahl, Schulung ist markiert", [[59.2, 80.6, 2]])}</span></li>
+          <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.</span></li>
+        </ol>` },
+
+  { id: "abw-messe", cat: "abwesenheiten", q: "Wie beantrage ich eine Messe?",
+    a: `<ol class="steps">
+          <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
+          <li><span>Bei <strong>Abwesenheit</strong> „Messe“ auswählen.
+            ${fig("workflow-auswahl-v2.png", 370, 504, "Abwesenheitsantrag mit geöffneter Auswahl, Messe ist markiert", [[59.2, 85.3, 2]])}</span></li>
+          <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.</span></li>
+        </ol>` },
+
+  { id: "abw-status", cat: "abwesenheiten", q: "Wo sehe ich, ob mein Antrag genehmigt wurde?",
+    a: `<div class="note">
+          <p><strong>Mit persönlichem E-Mail-Konto:</strong> Du bekommst die Nachricht per E-Mail. Im Workflow gibt es dann keine zusätzliche Nachricht.</p>
+          <p><strong>Ohne persönliches E-Mail-Konto:</strong> Die Nachricht kommt direkt im Workflow an. So findest du sie:</p>
+        </div>
+        <ol class="steps">
+          <li><span>In der Übersicht auf <strong>Workflow</strong> klicken.</span></li>
+          <li><span>Bei <strong>Status</strong> auf <strong>„Alle Nachrichten“</strong> umstellen.
+            ${fig("wf-status.png", 608, 65, "Filter im Workflow mit Absender, Betreff und Status Alle Nachrichten", [[97, 20, 2]], "wide")}
+            <span class="must inline"><span class="label">Wichtig</span>Nur mit „Alle Nachrichten“ siehst du wirklich alles, was im gewählten Zeitraum im Workflow passiert ist.</span></span></li>
+          <li><span>Bei <strong>Von</strong> und <strong>Bis</strong> den Zeitraum auswählen.
+            ${fig("wf-zeitraum.png", 380, 115, "Zeitraum im Workflow mit Von 01.09.2026 und Bis 30.09.2026", [[65.8, 10.4, 3]])}</span></li>
+          <li><span>In der Liste siehst du jetzt die Genehmigung von deinem Vorgesetzten, zum Beispiel „Ihr Abwesenheitsantrag -Urlaub- wurde genehmigt.“
+            ${fig("wf-nachrichten.png", 790, 230, "Nachrichtenliste im Workflow mit genehmigten Anträgen, Namen unkenntlich gemacht", [[55.7, 53.5, 4]], "wide")}</span></li>
+        </ol>` },
+  { id: "abw-storno", cat: "abwesenheiten", q: "Wie storniere ich einen genehmigten Antrag?",
+    a: `<ol class="steps">
+          <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
+          <li><span>Die Daten des zuvor genehmigten Antrags noch einmal eintragen: die Art der <strong>Abwesenheit</strong> sowie <strong>Von</strong> und <strong>Bis</strong>.</span></li>
+          <li><span>Auf <strong>Storno</strong> klicken.
+            ${fig("workflow-storno.png", 370, 500, "Abwesenheitsantrag mit eingetragenem Urlaub und markiertem Knopf Storno", [[86, 68.4, 2], [13.2, 96.8, 3]])}</span></li>
+        </ol>` },
+  { id: "abw-dienstreise-nach", cat: "abwesenheiten", q: "Wie erfasse ich eine Dienstreise nachträglich?",
+    a: `<ol class="steps">
+          <li><span>Die Dienstreise zuerst <strong>beantragen und genehmigen lassen</strong>, wie bei {{ref:abw-dienstreise}}. Ohne die Dienstreise vorher erfasst zu haben, kannst du die Dienstreisenacherfassung nicht starten. Erst wenn die Dienstreise beantragt und genehmigt wurde, ist sie in der Maske auswählbar.</span></li>
+          <li><span>In der Übersicht auf <strong>Workflow</strong> klicken.</span></li>
+          <li><span>Unten auf <strong>+ Dienstreisenacherfassung</strong> klicken.
+            ${fig("workflow-start-neu.png", 740, 732, "Workflow mit den Knöpfen Abwesenheitsantrag, Tagesoptionen und Dienstreisenacherfassung", [[82.3, 93.4, 3]], "wide")}</span></li>
+          <li><span>Im Formular die Daten eintragen. Hier am Beispiel einer <strong>Dienstreise in die USA</strong> am 18.08.2026:
+            ${fig("dienstreise-usa-v2.png", 515, 815, "Ausgefüllte Dienstreisenacherfassung für eine Reise in die USA am 18.08.2026 mit Zeiten über Mitternacht", [[49.7, 16.4, "N"], [86.4, 23.2, "N"], [96.9, 52.8, "N"], [3.5, 96.9, 5]])}
+            <dl class="cols">
+              <dt>Dienstreise</dt><dd>Die genehmigte Dienstreise auswählen, im Beispiel die Dienstreise am 18.08.2026.</dd>
+              <dt>Abwesenheitszeit</dt><dd>Von 07:30 bis N01:30, also bis 01:30 Uhr am nächsten Tag.</dd>
+              <dt>Davon</dt><dd>Die Abschnitte der Reise mit Typ, Beginn und Ende. Im Beispiel „Reisezeit aktiv“ von 07:30 bis N01:30. Es gibt bis zu 6 Zeilen.</dd>
+              <dt>Länder</dt><dd>In welchem Land du von wann bis wann warst. Im Beispiel Österreich von 07:30 bis 10:00 und USA von 10:00 bis N01:30. Es gibt bis zu 6 Zeilen.
+                <span class="modes-intro">Die Uhrzeit wählst du so:</span>
+                <span class="mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-5a2 2 0 0 1 1.9-1.4h10.2A2 2 0 0 1 19 8l2 5v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" fill="currentColor"/><path d="M6.4 12l1.3-3.6h8.6l1.3 3.6z" fill="#fff" opacity=".9"/><circle cx="7" cy="14.6" r="1.4" fill="#fff"/><circle cx="17" cy="14.6" r="1.4" fill="#fff"/></svg><span><strong>Autoreise:</strong> Zeitpunkt des <strong>Grenzübertritts</strong>.</span></span>
+                <span class="mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg><span><strong>Flugreise:</strong> <strong>Abflugzeitpunkt</strong> laut Ticket.</span></span></dd>
+              <dt>Privat-PKW</dt><dd>Anzahl der Kilometer mit dem Privat-PKW und Anzahl der Mitfahrer, im Beispiel jeweils 0.</dd>
+              <dt>Nächtigung</dt><dd>Damit weiß das System, dass es sich um eine <strong>mehrtägige Dienstreise</strong> handelt. Im Beispiel Ja, Nächtigung ohne Beleg: Nein.</dd>
+              <dt>Kommentar</dt><dd>Optional, im Beispiel „MagicCon Las Vegas“.</dd>
+            </dl>
+            <span class="must inline midnight"><span class="label">Wichtig: Reise über Mitternacht</span>Reicht die Reise in den nächsten Tag, schreibst du ein <strong>N</strong> vor die Uhrzeit.<span class="nx"><code>N01:30</code> = 01:30 Uhr am nächsten Tag</span></span></span></li>
+          <li><span>Auf <strong>Eintragen</strong> klicken.</span></li>
+        </ol>` },
+  { id: "abw-genehmigen", cat: "abwesenheiten", q: "Wie genehmige ich einen Antrag?", for: "Vorgesetzte",
+    a: `<ol class="steps">
+          <li><span>In der Übersicht auf <strong>Workflow</strong> klicken.</span></li>
+          <li><span>Die Anträge deiner Mitarbeiter stehen dort als Liste mit <strong>Von</strong>, <strong>Datum</strong> und <strong>Betreff</strong>. Im Betreff siehst du die Art der Abwesenheit. Auf den <strong>Betreff</strong> des Antrags klicken.
+            ${fig("workflow-vorgesetzter.png", 563, 90, "Liste der eingegangenen Abwesenheitsanträge mit den Spalten Von, Datum und Betreff", [[96.1, 86.7, 2]], "wide")}</span></li>
+          <li><span>Antrag prüfen: Oben stehen die Art der Abwesenheit, der Urlaubsstand des Mitarbeiters und der Zeitraum. Unter „Ihre Eingaben“ stehen Von und Bis, dazu kannst du einen Kommentar schreiben. Über <strong>Kalender</strong> kannst du direkt aus dem Antrag den Kalender starten und die geplanten Abwesenheiten sehen (siehe {{ref:kalender-abwesenheiten}}).
+            ${fig("workflow-genehmigen.png", 416, 597, "Abwesenheitsantrag Urlaub beim Vorgesetzten mit den Knöpfen Genehmigen, Ablehnen und Abbrechen", [[18, 49.9, 3], [24, 92.3, 4], [43.3, 92.3, 4]])}</span></li>
+          <li><span>Auf <strong>Genehmigen</strong> oder <strong>Ablehnen</strong> klicken.</span></li>
+        </ol>` },
+
+  { id: "kalender-abwesenheiten", cat: "kalender", q: "Wie sehe ich die geplanten Abwesenheiten aller Mitarbeiter?",
+    a: `<ol class="steps">
+          <li><span>In der Übersicht auf <strong>Kalender</strong> klicken.
+            ${fig("startseite-anonym.png", 1048, 532, "Gebos Übersicht, die Kachel Kalender ist markiert", [[28.6, 33.1, 1]], "wide")}</span></li>
+          <li><span>Du siehst alle Mitarbeiter und ihre geplanten Abwesenheiten im gewählten Zeitraum. Jede Zeile ist ein Mitarbeiter, jede Spalte ein Tag. Den Zeitraum wechselst du mit <strong>&lt;&lt;</strong> und <strong>&gt;&gt;</strong> neben der Überschrift. Was die Kürzel bedeuten, steht bei {{ref:kalender-kuerzel}}.
+            ${fig("kalender-uebersicht.png", 1110, 367, "Kalender für September 2026 mit Abwesenheiten der Mitarbeiter, Namen unkenntlich gemacht", [], "wide")}</span></li>
+        </ol>` },
+  { id: "kalender-kuerzel", cat: "kalender", q: "Was bedeuten die Kürzel im Kalender?",
+    a: `<div class="codes">
+          <span class="kz" style="background:#0080ff;color:#000">URL</span><p><strong>URL:</strong> Urlaub</p>
+          <span class="kz" style="background:#008000;color:#000">ZA</span><p><strong>ZA:</strong> Zeitausgleich</p>
+          <span class="kz" style="background:#008000;color:#000">DIR</span><p><strong>DIR:</strong> Dienstreise</p>
+          <span class="kz" style="background:#ffff00;color:#000">KoB</span><p><strong>KoB:</strong> Krank ohne Bestätigung</p>
+          <span class="kz" style="background:#ffff00;color:#000">KRA</span><p><strong>KRA:</strong> Krank</p>
+          <span class="kz" style="background:#ffff80;color:#000">ARZ</span><p><strong>ARZ:</strong> Arzt</p>
+          <span class="kz" style="background:#ffffcc;color:#000"></span><p><strong>Hellgelbe Spalte:</strong> Wochenende</p>
+        </div>` },
+
+  { id: "abrechnung-oeffnen", cat: "abrechnung", q: "Wie öffne ich meine Abrechnungsliste?",
+    a: `<ol class="steps">
+          <li><span>In der Übersicht auf <strong>Abrechnungsliste</strong> klicken.
+            ${fig("startseite-anonym.png", 1048, 532, "Gebos Übersicht, die Kachel Abrechnungsliste ist markiert", [[48.9, 33.1, 1]], "wide")}</span></li>
+          <li><span>Bei <strong>Von</strong> und <strong>Bis</strong> den Zeitraum wählen und auf <strong>Abfrage</strong> klicken.
+            ${fig("abrechnung-auswahl.png", 751, 735, "Auswahl der Abrechnungsliste mit Zeitraum, Abteilung, Dienstverhältnis, Mitarbeiterliste und dem Knopf Abfrage, Namen unkenntlich gemacht", [[26.6, 5.7, 2], [78.8, 28.3, 2]], "wide")}</span></li>
+          <li><span>Die Abrechnungsliste öffnet sich. Oben stehen deine Personalnummer und dein Name, der Zeitraum, deine Abteilung und wann die Liste erstellt wurde. Darunter folgt die Liste Tag für Tag. Was die einzelnen Bereiche bedeuten, steht bei {{ref:abrechnung-bereiche}}.</span></li>
+        </ol>` },
+  { id: "abrechnung-bereiche", cat: "abrechnung", q: "Was bedeuten die einzelnen Bereiche der Abrechnungsliste?",
+    a: `<h4>Linke Seite: Tage und Buchungen</h4>
+        ${fig("abrechnung-aendern-neu.png", 560, 332, "Linke Seite der Abrechnungsliste mit Datum, Zeitmodell, Stempelungen und Bewertung", [], "wide")}
+        <dl class="cols">
+          <dt>DATUM,TAG</dt><dd>Datum und Wochentag. Der heutige Tag steht in eckigen Klammern, zum Beispiel [24.09.2026, Do].</dd>
+          <dt>ZEITMODELL</dt><dd>Dein Zeitmodell als Nummer, zum Beispiel 22013850. Die <strong>letzten 4 Stellen</strong> sind dein Stundenausmaß, hier 3850 = 38,50 Stunden pro Woche. Die <strong>vorderen Stellen</strong> stehen für die Rechenregeln, die für dein Anstellungsverhältnis gelten.</dd>
+          <dt>STEMPELUNGEN</dt><dd>Deine Buchungen mit Uhrzeit: <strong>K</strong> = Kommt, <strong>G</strong> = Geht.</dd>
+          <dt>BEWERTUNG</dt><dd>Die gerechnete Arbeitszeit. Die Pause wird dabei automatisch abgezogen. Beispiel: K 07:04 G 15:35 ergibt 07:04–13:04 und 13:34–15:35.</dd>
+          <dt>BEMERKUNGEN</dt><dd>Notizen zum Tag.</dd>
+          <dt>Übertrag</dt><dd>Stand der Salden zu Beginn des Zeitraums. Darunter steht in Rot der erste und der letzte Tag mit einem Fehler (siehe Bereich Fehlerprotokoll).</dd>
+          <dt>Summe KW / Summe</dt><dd>Summen pro Kalenderwoche und für den ganzen Zeitraum (gelb).</dd>
+        </dl>
+        <h4>Rechte Seite: Stunden und Salden</h4>
+        ${fig("abrechnung-rechts-neu.png", 670, 332, "Rechte Seite der Abrechnungsliste mit Ist, Soll und Salden", [], "wide")}
+        <dl class="cols">
+          <dt>IST</dt><dd>Die Summe der bewerteten Zeit.</dd>
+          <dt>SOLL</dt><dd>Deine Sollzeit entsprechend deinem Beschäftigungsausmaß.</dd>
+          <dt>Ü/TAG</dt><dd>Die geleisteten Überstunden des Tages.</dd>
+          <dt>1:1/TAG</dt><dd>Gleitzeit plus oder minus (GLZ+ / GLZ−) für diesen Tag.</dd>
+          <dt>1:1 GES.</dt><dd>Dein aktueller Gleitzeitsaldo am jeweiligen Tag.</dd>
+          <dt>ZGÜ</dt><dd>Zeitguthaben aus Überstunden: Überstunden mit Zuschlägen sowie Normalarbeitszuschläge.</dd>
+          <dt>SAL./GES.</dt><dd>Dein Gesamtsaldo. Diese Zeit kannst du als Zeitausgleich (ZA) konsumieren.</dd>
+          <dt>Rote Zahlen</dt><dd>Minusstunden.</dd>
+        </dl>
+        <h4>Informationen</h4>
+        ${fig("abrechnung-info-neu.png", 302, 193, "Informationen unter der Abrechnungsliste mit Urlaubswerten und Salden", [])}
+        <dl class="cols">
+          <dt>Urlaub</dt><dd>Urlaubsperiode, Stichtag, Urlaubsanspruch, verbrauchter Urlaub und restlicher Urlaubsanspruch.</dd>
+          <dt>1:1, ZGÜ, SGes</dt><dd>Stand der Salden am Ende des Zeitraums: 1:1 ist dein Gleitzeitsaldo, ZGÜ dein Zeitguthaben aus Überstunden und SGes dein Gesamtsaldo, den du als Zeitausgleich konsumieren kannst.</dd>
+          <dt>Unterschrift Dienstnehmer</dt><dd>Platz für deine Unterschrift auf dem Ausdruck.</dd>
+        </dl>` },
+  { id: "abrechnung-aendern", cat: "abrechnung", q: "Wie ergänze oder ändere ich einen Eintrag?",
+    a: `<p>Ergänzungen und Änderungen machst du direkt in der Abrechnungsliste.</p>
+        <ol class="steps">
+          <li><span>Die Abrechnungsliste öffnen, wie bei {{ref:abrechnung-oeffnen}}.</span></li>
+          <li><span>Beim gewünschten Tag entweder auf das <strong>blaue Auge neben dem Datum</strong> klicken oder direkt auf die <strong>blaue Schrift bei der Zeitbuchung</strong>, zum Beispiel „K 12:00“ oder „GT URL“. Beides bringt dich in die Buchung.
+            ${fig("abrechnung-aendern-neu.png", 560, 332, "Abrechnungsliste mit markiertem Auge-Symbol neben dem Datum und markierten blauen Einträgen K 12:00 und GT URL", [[23.6, 27.1, 2], [61.6, 20.5, 2], [64.6, 87, 2]], "wide")}</span></li>
+        </ol>` },
+  { id: "abrechnung-pdf", cat: "abrechnung", q: "Wie bekomme ich die Abrechnungsliste als PDF?",
+    a: `<ol class="steps">
+          <li><span>Ganz unten in der Abrechnungsliste auf <strong>Als PDF ausgeben</strong> klicken.
+            ${fig("abrechnung-pdf-knopf.png", 260, 283, "Unterer Teil der Abrechnungsliste mit dem Link Als PDF ausgeben", [[44.6, 95.4, 1]])}</span></li>
+          <li><span>Die Abrechnungsliste öffnet sich als PDF.
+            ${fig("abrechnung-pdf.png", 1320, 635, "Abrechnungsliste als PDF, Name unkenntlich gemacht", [], "wide")}</span></li>
+        </ol>` },
+
+  { id: "fehler-warum", cat: "fehler", q: "Was zeigt das Fehlerprotokoll?",
+    a: `<p>Das Fehlerprotokoll zeigt alle Probleme, die mit dem Buchen zu tun haben, zum Beispiel wenn du einfach vergessen hast zu buchen.</p>
+        <ol class="steps">
+          <li><span>In der Übersicht auf <strong>Fehlerprotokoll</strong> klicken.
+            ${fig("startseite-anonym.png", 1048, 532, "Gebos Übersicht, die Kachel Fehlerprotokoll ist markiert", [[69.1, 33.1, 1]], "wide")}</span></li>
+          <li><span>Bei <strong>Von</strong> und <strong>Bis</strong> den Zeitraum wählen und auf <strong>Start</strong> klicken.
+            ${fig("fehler-auswahl.png", 821, 732, "Auswahl im Fehlerprotokoll mit Zeitraum, Mitarbeiterliste, Warnungen, Fehler und dem Knopf Start, Namen unkenntlich gemacht", [[22.5, 4.4, 2], [67.8, 93.3, 2]], "wide")}</span></li>
+          <li><span>Die Auswertung erscheint. Du siehst für den Zeitraum alle Tage mit einem Problem. Neben dem Datum steht, was fehlt, zum Beispiel <strong>KEINE BUCHUNGEN !</strong>, wenn an diesem Tag gar nicht gebucht wurde. Ganz oben steht außerdem, ob es schon vor dem gewählten Zeitraum Fehler gab. Mit einem Klick auf eine Fehlermeldung kannst du die Stempelung direkt beantragen, siehe {{ref:fehler-beheben}}.
+            ${fig("fehler-auswertung.png", 680, 495, "Auswertung im Fehlerprotokoll mit KOMMT/GEHT-FEHLER und mehreren Tagen KEINE BUCHUNGEN, Name unkenntlich gemacht", [], "wide")}</span></li>
+        </ol>` },
+  { id: "fehler-nachbuchen", cat: "fehler", q: "Wie buche ich etwas nach, zum Beispiel eine vergessene Buchung oder einen Arztbesuch?",
+    a: `<p>Nachbuchungen machst du in der <strong>Abrechnungsliste</strong>, denn sie ist die zentrale Stelle für Fehler und sonstige Einträge. Das gilt zum Beispiel, wenn du vergessen hast zu buchen oder einen Arztbesuch nachbuchen musst.</p>
+        <h4>Vergessene Buchung</h4>
+        <div class="note">
+          <p><strong>Beispiel:</strong> Am 22.09.2026 wurde die <strong>Geht-Buchung vergessen</strong>. Es gibt nur „K 07:58“, und darunter steht in Rot <strong>KOMMT/GEHT-FEHLER !</strong></p>
+          ${fig("beispiel-geht-vergessen.png", 687, 51, "Zeile in der Abrechnungsliste am 22.09.2026 mit K 07:58 und dem Hinweis KOMMT/GEHT-FEHLER", [], "wide")}
+        </div>
+        <ol class="steps">
+          <li><span>Die Abrechnungsliste öffnen, wie bei {{ref:abrechnung-oeffnen}}.</span></li>
+          <li><span>Beim gewünschten Tag auf das <strong>blaue Auge neben dem Datum</strong> oder auf die <strong>blaue Schrift bei der Zeitbuchung</strong> klicken, wie bei {{ref:abrechnung-aendern}}. Steht der Tag schon im Fehlerprotokoll, kannst du auch dort direkt auf den Fehler klicken, wie bei {{ref:fehler-beheben}}.</span></li>
+          <li><span>Es öffnet sich das Fenster <strong>Stempelungen vom 22.09.2026</strong>. Hier gibt es nur „Kommt 07:58“, die Geht-Buchung fehlt.
+            ${fig("geht-vergessen-fenster.png", 595, 560, "Fenster Stempelungen vom 22.09.2026 mit nur einer Buchung Kommt 07:58, der Knopf Neu ist markiert, Name unkenntlich gemacht", [[5.9, 91.1, 4]])}</span></li>
+          <li><span>Auf <strong>Neu</strong> bzw. <strong>Stempelungsantrag</strong> klicken und die fehlende Buchung eintragen. Im <strong>Stempelungsantrag</strong> wählst du das Datum und den Typ, zum Beispiel „Geht“, trägst die Uhrzeit ein und klickst auf <strong>Beantragen</strong>.
+            ${fig("stempelungsantrag.png", 310, 360, "Stempelungsantrag mit Datum 02.09.2026, Typ Geht, Uhrzeit 15:15 und dem Knopf Beantragen", [[58.4, 25.3, 4], [63.2, 58.9, 4], [16.8, 97.6, 4]])}</span></li>
+          <li><span>Die Nachbuchung muss danach im <strong>Workflow</strong> von deinem Vorgesetzten freigegeben werden.</span></li>
+        </ol>
+        <h4>Arztbesuch</h4>
+        <ol class="steps">
+          <li><span><strong>Arztbestätigung</strong> beim Arzt mitnehmen.
+            ${fig("arztbestaetigung.png", 548, 417, "Beispiel einer Arztbestätigung an den Dienstgeber mit Datum und Uhrzeit, Name und Arztstempel unkenntlich gemacht", [])}</span></li>
+          <li><span><strong>Arztbesuch buchen.</strong> Beispiel: Der Arztbesuch dauert von <strong>09:15 bis 09:40</strong>. Danach kommst du um 10:00 in die Firma und gehst um 16:30.
+            <span class="must inline"><span class="label">Wichtig</span><strong>„Kommt (Abw.)“</strong> verwendest du, wenn es sich um einen <strong>Termin untertags</strong> handelt. Bist du den <strong>ganzen Tag nicht da</strong>, wählst du die Option <strong>„Abwesend“</strong>. Diese gilt für den gesamten Arbeitstag.</span>
+            <ol class="sub">
+              <li><span>Zuerst die <strong>normale Tagesbuchung</strong>: Kommt 10:00 und Geht 16:30. Im Fenster „Stempelungen vom“ (über das blaue Auge in der Abrechnungsliste, siehe {{ref:abrechnung-aendern}}) sieht das so aus. Dann auf <strong>Neu</strong> klicken.
+                ${fig("arzt-1-tag.png", 595, 560, "Fenster Stempelungen vom 17.09.2026 mit Kommt 10:00 und Geht 16:30, der Knopf Neu ist markiert, Name unkenntlich gemacht", [[5.5, 90.5, "a"]])}</span></li>
+              <li><span>Beginn des Arztbesuchs eintragen: Typ <strong>„Kommt (Abw.)“</strong>, Zeit <strong>09:15</strong>, Abwesenheit <strong>„Arzt“</strong>. Dann auf <strong>Speichern</strong> klicken.
+                ${fig("arzt-2-kommt.png", 420, 300, "Neue Stempelung mit Typ Kommt (Abw.), Zeit 09:15 und Abwesenheit Arzt, Name unkenntlich gemacht", [[66, 34.5, "b"], [48.8, 42.8, "b"], [96, 60, "b"], [51.7, 96, "b"]])}</span></li>
+              <li><span>Nochmals auf <strong>Neu</strong> klicken und das Ende des Arztbesuchs eintragen: Typ <strong>„Geht (Abw.)“</strong>, Zeit <strong>09:40</strong>, Abwesenheit <strong>„Arzt“</strong>. Dann auf <strong>Speichern</strong> klicken.
+                ${fig("arzt-3-geht.png", 420, 300, "Neue Stempelung mit Typ Geht (Abw.), Zeit 09:40 und Abwesenheit Arzt, Name unkenntlich gemacht", [[66, 34.5, "c"], [48.8, 42.8, "c"], [96, 60, "c"], [51.7, 96, "c"]])}</span></li>
+              <li><span>Das Ergebnis: Der Arztbesuch steht gelb markiert mit „Kommt Abwesend“ 09:15 und „Geht Abwesend“ 09:40, darunter die normale Tagesbuchung.
+                ${fig("arzt-4-ergebnis.png", 595, 325, "Stempelungen vom 17.09.2026 mit Kommt Abwesend 09:15 Arzt, Geht Abwesend 09:40 Arzt, Kommt 10:00 und Geht 16:30, Name unkenntlich gemacht", [])}</span></li>
+            </ol></span></li>
+          <li><span>Die Arztbestätigung in <strong>Olis Büro</strong> legen.</span></li>
+        </ol>` },
+  { id: "fehler-beheben", cat: "fehler", q: "Wie behebe ich einen Fehler im Fehlerprotokoll?",
+    a: `<p>So wie in {{ref:fehler-nachbuchen}} am Beispiel eines Arzttermins erklärt, kannst du im Fehlerprotokoll <strong>jeden Fehler einzeln abarbeiten</strong>. In den meisten Fällen geht es um <strong>vergessene Buchungen</strong> beim Ein- oder Ausstempeln. Dann ist eine <strong>Nachbuchung</strong> nötig, die dein Vorgesetzter anschließend im <strong>Workflow freigeben</strong> muss.</p>
+        <ol class="steps">
+          <li><span>Das Fehlerprotokoll öffnen, wie bei {{ref:fehler-warum}}.</span></li>
+          <li><span>In der Auswertung direkt auf die einzelne <strong>Fehlermeldung</strong> klicken.
+            ${fig("fehler-auswertung.png", 680, 495, "Auswertung im Fehlerprotokoll, die Fehlermeldung KOMMT/GEHT-FEHLER am 01.09.2026 ist markiert", [[70.3, 23, 2]], "wide")}</span></li>
+          <li><span>Dort kannst du die <strong>Stempelung direkt beantragen</strong>. Es öffnet sich das Fenster <strong>Stempelungen vom</strong> mit diesem Tag. Dort siehst du die vorhandenen Stempelungen. Unten findest du die Knöpfe Stempelungsantrag, Tagesoptionenantrag und Dienstreiseländer.
+            ${fig("fehler-stempelungen-neu.png", 844, 561, "Fenster Stempelungen vom 11.09.2026 ohne Stempelungen, mit den Knöpfen Stempelungsantrag, Tagesoptionenantrag, Dienstreiseländer, Ok und Abbrechen, Name unkenntlich gemacht", [[9.6, 88.2, 3]], "wide")}</span></li>
+          <li><span>Die fehlende Buchung nachtragen, so wie in {{ref:fehler-nachbuchen}} beschrieben.</span></li>
+          <li><span>Die Nachbuchung wird danach im <strong>Workflow</strong> von deinem Vorgesetzten freigegeben, siehe {{ref:abw-genehmigen}}.</span></li>
+        </ol>` },
+
+  { id: "anwesenheit-wer", cat: "anwesenheit", q: "Wie sehe ich, wer gerade da ist?",
+    a: `<ol class="steps">
+          <li><span>In der Übersicht auf <strong>Anwesenheitsübersicht</strong> klicken.
+            ${fig("startseite-anonym.png", 1048, 532, "Gebos Übersicht, die Kachel Anwesenheitsübersicht ist markiert", [[89.3, 33.1, 1]], "wide")}</span></li>
+          <li><span>Du siehst alle Mitarbeiter nach Abteilung geordnet. Die Farbe links neben dem Namen zeigt, wer gerade eingestempelt ist, wer nicht eingestempelt ist und wer ganztägig abwesend ist, zum Beispiel wegen Urlaub. Was die Farben bedeuten, steht bei {{ref:anwesenheit-farben}}.
+            ${fig("anwesenheit-uebersicht.png", 1496, 450, "Anwesenheitsübersicht mit Mitarbeitern nach Abteilungen, Namen unkenntlich gemacht", [], "wide")}</span></li>
+        </ol>` },
+  { id: "anwesenheit-farben", cat: "anwesenheit", q: "Was bedeuten die Farben in der Anwesenheitsübersicht?",
+    a: `<div class="legend">
+          <img src="img/anwesenheit-gruen.png" alt="Beispiel: Mitarbeiter mit grünem Feld" width="275" height="60">
+          <p><strong>Grün:</strong> Der Mitarbeiter ist gerade eingestempelt.</p>
+          <img src="img/anwesenheit-rot.png" alt="Beispiel: Mitarbeiter mit rotem Feld" width="275" height="60">
+          <p><strong>Rot:</strong> Der Mitarbeiter ist nicht eingestempelt.</p>
+          <img src="img/anwesenheit-abwesend.png" alt="Beispiel: Mitarbeiter mit blauem Feld URL und dem Hinweis Abw. Urlaub" width="275" height="60">
+          <p><strong>Blau mit Kürzel:</strong> Der Mitarbeiter ist ganztägig abwesend. Das Kürzel und der Text darunter zeigen den Grund, zum Beispiel <strong>URL</strong> und „Abw. Urlaub“.</p>
+        </div>` },
+  { id: "anwesenheit-zusatzfelder", cat: "anwesenheit", q: "Wie finde ich Mitarbeiter mit bestimmten Kenntnissen, zum Beispiel Ersthelfer?",
+    a: `<p>Bei den <strong>Zusatzfeldern</strong> sind spezifische Kenntnisse der Mitarbeiter eingetragen, aktuell zum Beispiel <strong>Ersthelfer</strong>.</p>
+        <ol class="steps">
+          <li><span>Die Anwesenheitsübersicht öffnen, wie bei {{ref:anwesenheit-wer}}.</span></li>
+          <li><span>Bei <strong>Zusatzfelder</strong> die gewünschte Kenntnis auswählen, zum Beispiel „Ersthelfer“. Jetzt siehst du nur noch die Mitarbeiter mit dieser Kenntnis und an der Farbe, ob sie gerade da sind.
+            ${fig("anwesenheit-zusatzfelder.png", 1050, 410, "Anwesenheitsübersicht mit Zusatzfeld Ersthelfer, zwei Mitarbeiter werden angezeigt, Namen unkenntlich gemacht", [[77.1, 5.4, 2]], "wide")}</span></li>
+        </ol>` },
+
+
+  { id: "hardware-kontakt", cat: "hardware", q: "Wo stelle ich Fragen und wen kontaktiere ich?",
+    a: `<dl class="cols">
+          <dt>Allgemeine Fragen</dt><dd>Im Slack-Channel <strong>#gebos-zeiterfassung</strong> posten. Während der Übergangsphase sammeln wir dort alle Fragen, Probleme und Rückmeldungen zentral.</dd>
+          <dt>Konkrete Fragen</dt><dd>Direkt mit <strong>Alex</strong> oder <strong>David</strong> Kontakt aufnehmen.</dd>
+        </dl>
+        ${fig("slack-channel.png", 676, 83, "Nachricht im Slack-Channel gebos-zeiterfassung: Fragen und Unterstützung bei der neuen Zeiterfassung", [])}` }
+];
+
+const STAND = "Stand: 24.09.2026";
+
+/* ---------- ab hier Logik ---------- */
+const $ = s => document.querySelector(s);
+const state = { cat: "alle", q: "" };
+const PENDING = '<p class="pending">Antwort folgt.</p>';
+
+function norm(s) { return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss"); }
+function stripTags(html) { const d = document.createElement("div"); d.innerHTML = html || ""; return d.textContent; }
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function highlight(text, terms) {
+  if (!terms.length) return esc(text);
+  const n = norm(text), marks = new Array(text.length).fill(false);
+  terms.forEach(t => { let i = n.indexOf(t); while (i !== -1) { for (let k = i; k < i + t.length; k++) marks[k] = true; i = n.indexOf(t, i + 1); } });
+  let out = "", open = false;
+  for (let i = 0; i < text.length; i++) {
+    if (marks[i] && !open) { out += "<mark>"; open = true; }
+    if (!marks[i] && open) { out += "</mark>"; open = false; }
+    out += esc(text[i]);
+  }
+  return out + (open ? "</mark>" : "");
+}
+function highlightHtml(html, terms) {
+  if (!terms.length) return html;
+  const d = document.createElement("div"); d.innerHTML = html;
+  const walk = node => [...node.childNodes].forEach(c => {
+    if (c.nodeType === 3) { const s = document.createElement("span"); s.innerHTML = highlight(c.textContent, terms); c.replaceWith(...s.childNodes); }
+    else walk(c);
+  });
+  walk(d); return d.innerHTML;
+}
+const catName = id => CATEGORIES.find(c => c.id === id).name;
+/* Nummerierung: Bereich = 1, 2, 3 … ; Frage = 1a, 1b … (Reihenfolge wie oben in den Daten) */
+function code(catId, faqId) {
+  const n = CATEGORIES.filter(c => !c.info).findIndex(c => c.id === catId) + 1;
+  if (!n) return "";
+  if (!faqId) return String(n);
+  const i = FAQ.filter(f => f.cat === catId).findIndex(f => f.id === faqId);
+  return n + String.fromCharCode(97 + i);
+}
+function matches(item, terms) {
+  const hay = norm(item.q + " " + stripTags(item.a) + " " + catName(item.cat) + " " + (item.for || ""));
+  return terms.every(t => hay.includes(t));
+}
+
+/* {{ref:frage-id}} wird zur aktuellen Nummer der Frage, z. B. 2a */
+function refs(html) {
+  return html.replace(/\{\{ref:([a-z0-9-]+)\}\}/g, (m, id) => {
+    const f = FAQ.find(x => x.id === id);
+    return f ? `<a href="#${id}" data-open="${id}">${code(f.cat, id)}</a>` : m;
+  });
+}
+
+function renderSide() {
+  $("#toc").innerHTML = CATEGORIES.map(c => {
+    const n = c.info ? "Info" : FAQ.filter(f => f.cat === c.id).length;
+    return `<li><a href="#kat-${c.id}" data-goto="${c.id}">${c.info ? "" : code(c.id) + " · "}${esc(c.name)} <small>${n}</small></a></li>`;
+  }).join("");
+  const done = FAQ.filter(f => f.a && !f.partial).length;
+  $("#progress").textContent = `${done} von ${FAQ.length} Antworten fertig`;
+  $("#bar").style.width = (FAQ.length ? done / FAQ.length * 100 : 0) + "%";
+}
+
+function renderChips(terms) {
+  const all = [{ id: "alle", name: "Alle" }, ...CATEGORIES];
+  $("#chips").innerHTML = all.map(c => {
+    const count = c.info ? "" : FAQ.filter(f => (c.id === "alle" || f.cat === c.id) && matches(f, terms)).length;
+    return `<button class="chip" type="button" data-cat="${c.id}" aria-pressed="${state.cat === c.id}">${esc(c.name)}${count === "" ? "" : ` <small>${count}</small>`}</button>`;
+  }).join("");
+}
+
+function render(openId) {
+  const terms = norm(state.q).split(/\s+/).filter(Boolean);
+  const hits = FAQ.filter(f => (state.cat === "alle" || f.cat === state.cat) && matches(f, terms));
+  renderChips(terms);
+  $("#clear").hidden = !state.q;
+
+  const infos = CATEGORIES.filter(c => c.info && (state.cat === "alle" || state.cat === c.id)
+    && terms.every(t => norm(c.name + " " + stripTags(c.info)).includes(t)));
+  if (!hits.length && !infos.length) {
+    $("#status").textContent = "";
+    $("#list").innerHTML = `<div class="empty"><h3>Keine Treffer</h3><p>Zu „${esc(state.q)}“ gibt es noch keine Frage. Versuch ein anderes Stichwort.</p></div>`;
+    return;
+  }
+  $("#status").textContent = terms.length ? `${hits.length} ${hits.length === 1 ? "Frage" : "Fragen"} zu „${state.q}“` : "";
+
+  $("#list").innerHTML = CATEGORIES.filter(c => infos.includes(c) || hits.some(h => h.cat === c.id)).map(c => {
+    if (c.info) return `<section class="group infogroup" id="kat-${c.id}">
+      <h2>${esc(c.name)}</h2>
+      <p>${esc(c.text)}</p>
+      <div class="infobody">${highlightHtml(c.info, terms)}</div>
+    </section>`;
+    const items = hits.filter(h => h.cat === c.id);
+    return `<section class="group" id="kat-${c.id}">
+      <h2><span class="no">${code(c.id)}</span> ${esc(c.name)} <span class="n">${items.length}</span></h2>
+      <p>${esc(c.text)}</p>
+      ${c.intro ? `<div class="intro"><span class="label">So funktioniert’s</span><p>${c.intro}</p></div>` : ""}
+      ${items.map(f => `<details id="${f.id}" class="${f.a && !f.partial ? "" : "todo"}" ${terms.length || f.id === openId ? "open" : ""}>
+        <summary><span class="q"><span class="code">${code(c.id, f.id)}</span> ${highlight(f.q, terms)}${f.for ? `<span class="for">${esc(f.for)}</span>` : ""}</span></summary>
+        <div class="answer">${f.a ? highlightHtml(refs(f.a), terms) : f.wip ? "" : PENDING}
+          <div class="meta">
+            ${f.wip ? '<span class="badge wip">Work in Progress</span>' : !f.a ? '<span class="badge open">Antwort offen</span>' : f.partial ? '<span class="badge open">Teilweise</span>' : '<span class="badge done">Fertig</span>'}
+            <button class="linkbtn" type="button" data-link="${f.id}">Link zu dieser Frage kopieren</button>
+          </div>
+        </div>
+      </details>`).join("")}
+    </section>`;
+  }).join("");
+}
+
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200);
+}
+async function copy(text, msg) {
+  try { await navigator.clipboard.writeText(text); toast(msg); }
+  catch { toast("Kopieren nicht möglich – bitte Link aus der Adresszeile nehmen."); }
+}
+
+$("#chips").addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]"); if (!b) return;
+  state.cat = b.dataset.cat; render();
+});
+$("#toc").addEventListener("click", e => {
+  const a = e.target.closest("[data-goto]"); if (!a) return;
+  e.preventDefault();
+  if (state.cat !== "alle" && state.cat !== a.dataset.goto) { state.cat = "alle"; render(); }
+  const el = document.getElementById("kat-" + a.dataset.goto);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+$("#q").addEventListener("input", e => { state.q = e.target.value.trim(); render(); });
+$("#searchForm").addEventListener("submit", e => e.preventDefault());
+$("#clear").addEventListener("click", () => { $("#q").value = ""; state.q = ""; render(); $("#q").focus(); });
+document.addEventListener("click", e => {
+  const l = e.target.closest("[data-link]");
+  if (l) copy(location.href.split("#")[0] + "#" + l.dataset.link, "Link kopiert");
+  const o = e.target.closest("[data-open]");
+  if (o) {
+    e.preventDefault();
+    const f = FAQ.find(x => x.id === o.dataset.open);
+    if (state.cat !== "alle" && state.cat !== f.cat) state.cat = "alle";
+    render(f.id);
+    const el = document.getElementById(f.id);
+    if (el) { el.open = true; el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+  }
+});
+
+$("#stand").textContent = STAND;
+renderSide();
+const start = location.hash.slice(1);
+render(FAQ.some(f => f.id === start) ? start : null);
+if (start) { const el = document.getElementById(start); if (el) el.scrollIntoView({ block: "start" }); }
+</script>
+
+</body>
+</html>

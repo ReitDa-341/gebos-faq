@@ -1,0 +1,7 @@
+# Vercel → Settings → Environment Variables
+# Diese zwei Werte musst du selbst einsetzen (nur du hast sie):
+
+NEXT_PUBLIC_SUPABASE_URL=        # Supabase → Project Settings → API → Project URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=   # Supabase → Project Settings → API → anon public
+
+# Den service_role-Schlüssel braucht die FAQ NICHT – bitte nicht eintragen.
