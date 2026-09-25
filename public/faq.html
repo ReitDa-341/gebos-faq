@@ -336,6 +336,15 @@ const FAQ = [
             </figure></span></li>
         </ol>` },
 
+  { id: "terminal-passwort", cat: "terminal", q: "Wie ändere ich mein Passwort?",
+    a: `<ol class="steps">
+          <li><span>Nach der Anmeldung <strong>oben rechts</strong> auf das Personen-Symbol mit deinem Kürzel klicken.
+            ${fig("passwort-menue.png", 513, 150, "Menü oben rechts mit den Einträgen Passwort ändern und Logout, Kürzel unkenntlich gemacht", [[78.2, 16, 1], [62, 38.7, 2]])}</span></li>
+          <li><span>Auf <strong>Passwort ändern</strong> klicken.</span></li>
+          <li><span><strong>Altes Passwort</strong>, <strong>Neues Passwort</strong> und die <strong>Wiederholung</strong> eintragen und auf <strong>Passwort ändern</strong> klicken.
+            ${fig("passwort-formular.png", 370, 230, "Formular Passwort ändern mit den Feldern Altes Passwort, Neues Passwort und Wiederholung", [[97.3, 33.9, 3], [97.3, 47, 3], [97.3, 60.9, 3], [34.6, 91.3, 3]])}</span></li>
+        </ol>` },
+
   { id: "abw-urlaub", cat: "abwesenheiten", q: "Wie beantrage ich Urlaub?",
     a: `<ol class="steps">
           <li><span>Nach der Anmeldung in der Übersicht auf <strong>Workflow</strong> klicken.
@@ -361,10 +370,10 @@ const FAQ = [
             ${fig("workflow-zeitausgleich.png", 370, 504, "Ausgefüllter Abwesenheitsantrag für Zeitausgleich", [[59.2, 61.7, 2], [33.8, 96.2, 3]])}</span></li>
         </ol>` },
 
-  { id: "abw-dienstreise", cat: "abwesenheiten", q: "Wie beantrage ich eine Dienstreise?",
+  { id: "abw-dienstreise", cat: "abwesenheiten", q: "Wie beantrage ich eine Dienstreise oder Messe?",
     a: `<ol class="steps">
           <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
-          <li><span>Bei <strong>Abwesenheit</strong> „Dienstreise“ auswählen.</span></li>
+          <li><span>Bei <strong>Abwesenheit</strong> „Dienstreise“ oder „Messe“ auswählen.</span></li>
           <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.
             ${fig("workflow-dienstreise.png", 370, 504, "Ausgefüllter Abwesenheitsantrag für eine Dienstreise mit Kommentar", [[59.2, 61.7, 2], [33.8, 96.2, 3]])}</span></li>
         </ol>` },
@@ -374,14 +383,6 @@ const FAQ = [
           <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
           <li><span>Bei <strong>Abwesenheit</strong> „Schulung“ auswählen.
             ${fig("workflow-schulung-v2.png", 370, 504, "Abwesenheitsantrag mit geöffneter Auswahl, Schulung ist markiert", [[59.2, 80.6, 2]])}</span></li>
-          <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.</span></li>
-        </ol>` },
-
-  { id: "abw-messe", cat: "abwesenheiten", q: "Wie beantrage ich eine Messe?",
-    a: `<ol class="steps">
-          <li><span>Workflow öffnen und auf <strong>Abwesenheitsantrag</strong> klicken, wie bei {{ref:abw-urlaub}}.</span></li>
-          <li><span>Bei <strong>Abwesenheit</strong> „Messe“ auswählen.
-            ${fig("workflow-auswahl-v2.png", 370, 504, "Abwesenheitsantrag mit geöffneter Auswahl, Messe ist markiert", [[59.2, 85.3, 2]])}</span></li>
           <li><span>Von und Bis eingeben, wenn du willst einen Kommentar schreiben, und auf <strong>Abschicken</strong> klicken.</span></li>
         </ol>` },
 
